@@ -27,10 +27,16 @@ public class Input
                 try
                 {
                     boundsArray = bounds.Split();
-                    int bounds_x = Convert.ToInt32(boundsArray[0]);
-                    int bounds_y = Convert.ToInt32(boundsArray[1]);
-                    Console.WriteLine("Bounds have been set to: " + bounds_x + " " + bounds_y);
-                    done = true;
+                    if (Convert.ToInt32(boundsArray[0]) > 9 || Convert.ToInt32(boundsArray[1]) > 9 || Convert.ToInt32(boundsArray[0]) < 0 || Convert.ToInt32(boundsArray[1]) < 0)
+                    {
+                        Console.WriteLine("Please make sure you enter integers 0-9.");
+                        done = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Bounds have been set to: " + boundsArray[0] + " " + boundsArray[1]);
+                        done = true;
+                    }
                 }
                 catch(FormatException ex)
                 {
@@ -75,4 +81,47 @@ public class Input
 
         return movement;
     }
+
+    public static string Position(int bx, int by)
+    {
+        bool done = false;
+        string pos = "";
+
+        while (done == false)
+        {
+            Console.Write("Please enter the rover's position: ");
+            pos = Console.ReadLine().Replace(" ", string.Empty);
+            int trigger = 0;
+            int val0 = 0;
+            int val1 = 0;
+
+            List<string> posList = new List<string>();
+            for (int i = 0; i < pos.Length; i++) { posList.Add(pos[i].ToString()); }
+
+            // Allows user to exit program when entering position.
+            if (pos == "exit") { MarsRovers.Program.Exit(); }
+
+            // Makes sure position is inside set bounds.
+            if (Convert.ToInt32(posList[0]) > bx || Convert.ToInt32(posList[1]) > by)
+            {
+                Console.WriteLine("Values entered are larger than bounds. Please enter a value within 0-" + (bx).ToString() + " for x value and 0-" + (by).ToString() + " for y value.");
+                return Position(bx, by);
+            }
+
+            for (int i = 0; i < pos.Length; i++)
+            {
+                if (!(int.TryParse(posList[0], out val0) == true && int.TryParse(posList[1], out val1) == true && pos.Length == 3 && (posList[2].ToString() == "N" || posList[2].ToString() == "E" || posList[2].ToString() == "S" || posList[2].ToString() == "W")))
+                {
+                    Console.WriteLine("Please make sure you only use integers 0-9 and a direction (N,E,S,W) for rover location.");
+                    trigger += 1;
+                    return Position(bx, by);
+                }
+            }
+
+            if (trigger == 0) { done = true; }
+        }
+
+        return pos;
+    }
+
 }

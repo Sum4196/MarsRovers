@@ -11,7 +11,7 @@ namespace MarsRovers
         public int X { get; set; }
         public int Y { get; set; }
         public string DIR { get; set; }
-        public Rover(int x_pos=0, int y_pos=0, string direction="N")
+        public Rover(int x_pos = 0, int y_pos = 0, string direction = "N")
         {
             X = x_pos;
             Y = y_pos;
@@ -24,24 +24,24 @@ namespace MarsRovers
         }
         public void MoveForward()
         {
-            if (DIR == "N") { X += 1; }
-            if (DIR == "E") { Y += 1; }
-            if (DIR == "S") { X -= 1; }
-            if (DIR == "W") { Y -= 1; }
+            if (DIR == "N") { Y += 1; }
+            else if (DIR == "E") { X += 1; }
+            else if (DIR == "S") { Y -= 1; }
+            else if (DIR == "W") { X -= 1; }
         }
         public void TurnLeft()
         {
             if (DIR == "N") { DIR = "W"; }
-            if (DIR == "E") { DIR = "N"; }
-            if (DIR == "S") { DIR = "E"; }
-            if (DIR == "W") { DIR = "S"; }
+            else if (DIR == "E") { DIR = "N"; }
+            else if (DIR == "S") { DIR = "E"; }
+            else if (DIR == "W") { DIR = "S"; }
         }
         public void TurnRight()
         {
             if (DIR == "N") { DIR = "E"; }
-            if (DIR == "E") { DIR = "S"; }
-            if (DIR == "S") { DIR = "W"; }
-            if (DIR == "W") { DIR = "N"; }
+            else if (DIR == "E") { DIR = "S"; }
+            else if (DIR == "S") { DIR = "W"; }
+            else if (DIR == "W") { DIR = "N"; }
         }
     }
 }
