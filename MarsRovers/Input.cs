@@ -3,12 +3,14 @@ using System.Collections.Generic;
 
 public class Input
 {
+    // Bounds function to ensure the input of bounds is correct and will continue to ask the user for input until a proper string is given.
     public static string[] Bounds()
     {
         bool done = false;
         string bounds = "";
         string[] boundsArray = bounds.Split();
 
+        // Loop that continues to get user input ensuring the input is valid.
         while (done == false)
         {
             Console.Write("Please enter NorthEast corner coordinates: ");
@@ -52,11 +54,12 @@ public class Input
 
     }
 
+    // Movement function to ensure the input is correct and will continue to ask the user for input until a proper string is given.
     public static string Movement()
     {
         bool done = false;
         string movement = "";
-
+        // Loop that continues to get user input ensuring the input is valid.
         while (done == false)
         {
             Console.Write("Please enter movement commands: ");
@@ -82,11 +85,12 @@ public class Input
         return movement;
     }
 
+    // Position function to ensure the input is correct and will continue to ask the user for input until a proper string is given.
     public static string Position(int bx, int by)
     {
         bool done = false;
         string pos = "";
-
+        // Loop that continues to get user input ensuring the input is valid.
         while (done == false)
         {
             Console.Write("Please enter the rover's position: ");
@@ -107,7 +111,7 @@ public class Input
                 Console.WriteLine("Values entered are larger than bounds. Please enter a value within 0-" + (bx).ToString() + " for x value and 0-" + (by).ToString() + " for y value.");
                 return Position(bx, by);
             }
-
+            // Ensures input fits proper format.
             for (int i = 0; i < pos.Length; i++)
             {
                 if (!(int.TryParse(posList[0], out val0) == true && int.TryParse(posList[1], out val1) == true && pos.Length == 3 && (posList[2].ToString() == "N" || posList[2].ToString() == "E" || posList[2].ToString() == "S" || posList[2].ToString() == "W")))
